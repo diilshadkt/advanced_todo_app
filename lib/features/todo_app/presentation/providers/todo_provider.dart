@@ -31,6 +31,7 @@ class Todo extends _$Todo {
     }
     return null;
   }
+
   Future<String?> deleteTodo(int id) async {
     try {
       await DeleteTodoUsecase(repository: repository)(id: id);
