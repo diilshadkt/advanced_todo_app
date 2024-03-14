@@ -5,7 +5,7 @@ class TodoModel {
   @Id()
   int id = 0;
   String? title;
-  String? isChecked;
+  bool? isChecked;
 
   TodoModel({this.id = 0, required this.title, required this.isChecked});
 }

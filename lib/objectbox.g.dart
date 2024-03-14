@@ -39,7 +39,7 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(3, 3747973553520871957),
             name: 'isChecked',
-            type: 9,
+            type: 1,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -105,13 +105,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
         objectToFB: (TodoModel object, fb.Builder fbb) {
           final titleOffset =
               object.title == null ? null : fbb.writeString(object.title!);
-          final isCheckedOffset = object.isChecked == null
-              ? null
-              : fbb.writeString(object.isChecked!);
           fbb.startTable(4);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
-          fbb.addOffset(2, isCheckedOffset);
+          fbb.addBool(2, object.isChecked);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -122,8 +119,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final titleParam = const fb.StringReader(asciiOptimization: true)
               .vTableGetNullable(buffer, rootOffset, 6);
-          final isCheckedParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 8);
+          final isCheckedParam =
+              const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 8);
           final object = TodoModel(
               id: idParam, title: titleParam, isChecked: isCheckedParam);
 
@@ -146,5 +143,5 @@ class TodoModel_ {
 
   /// see [TodoModel.isChecked]
   static final isChecked =
-      obx.QueryStringProperty<TodoModel>(_entities[0].properties[2]);
+      obx.QueryBooleanProperty<TodoModel>(_entities[0].properties[2]);
 }

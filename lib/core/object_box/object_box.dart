@@ -9,8 +9,13 @@ class ObjectBox {
   late final Store store;
   late final Box<TodoModel> todoBox;
 
+
+
   ObjectBox._create(this.store) {
     todoBox = store.box<TodoModel>();
+  }
+  static ObjectBox get instance{
+    return instance;
   }
   static Future<void> Create() async {
     if (_instance == null) {
